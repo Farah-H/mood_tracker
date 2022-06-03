@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block content %}
+<style>
+
+input[type=text], input[type=email], select {
+width: 50%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid skyblue;
+border-radius: 4px;
+box-sizing: border-box;
+}
+input[type=password] {
+width: 50%;
+padding: 12px 20px;
+margin: 8px 0;
+display: inline-block;
+border: 1px solid skyblue;
+border-radius: 4px;
+box-sizing: border-box;
+}
+input[type=submit] {
+background-color: #4CAF50;
+border: none;
+color: white;
+padding: 16px 32px;
+text-decoration: none;
+margin: 4px 2px;
+cursor: pointer;
+}
+h1 {text-align: center;}
+.text-center {
+text-align: center;
+}
+ul {
+list-style-type: none;
+margin: 0;
+padding: 0;
+overflow:auto;
+background-color: #333;
+}
+li {
+display: inline;
+float: right;
+}
+li a {
+display: block;
+color: white;
+text-align: center;
+padding: 14px 16px;
+text-decoration: none;
+}
+li a:hover {
+background-color: brown;
+}
+.active {
+background-color: #04AA6D;
+}
+</style>
+</head>
+<body>
+<form method="POST" action="">
+<div class="text-center">
+<p style="font-family: Lucida Console;font-size: larger;"><b> <label for="name">Name</label></b></p>
+<input name='name' placeholder="Enter Name" type="text" />
+<br />
+<p style="font-family: Lucida Console;font-weight: bolder;"><b><label for="mood">How are you feeling?</label></b></p>
+<select id="mood" name="How are you feeling?">
+<option value="amazing">AMAZING!</option>
+<option value="good">Good :)</option>
+<option value="ok">Neutral</option>
+<option value="bad">Bad :(</option>
+<option value="terrible">TERRIBLE D:</option>
+</select>
+<br />
+<input type='submit' />
+</div>
+</form>
+</body>
+{% endblock %}
