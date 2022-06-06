@@ -8,7 +8,7 @@ After they submit an entry they are treated with a success page and promted to h
 This was tested first locally to understand what provisioning was needed for both the app and DB, using a publicly available RDS instance created using AWS console:
 ![](./../images/test-db.png)
 
-Obviously this app is quite simple, but it is enough to demonstrate that there is a web interface, it is connecting to and successfully querying a relational database.
+Obviously this app is quite simple, but it is enough to demonstrate that there is a web interface and it is connecting to and successfully querying a relational database.
 
 ### Lessons from Local Testing: 
 - DB instance must be created first
