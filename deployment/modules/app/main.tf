@@ -1,13 +1,18 @@
-# resource "tls_private_key" "mood_tls_private_key" {
-#   algorithm = "RSA"
-#   rsa_bits  = 4096
-# }
+resource "tls_private_key" "mood_tls_private_key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
 
-# resource "aws_key_pair" "mood_key_pair" {
-#   key_name   = "mood-app-key"
-#   public_key = tls_private_key.mood_tls_private_key.public_key_openssh
-# }
-# I tried to make this work :') 
+resource "aws_key_pair" "mood_key_pair" {
+  key_name   = "mood-app-key-v2"
+  public_key = tls_private_key.mood_tls_private_key.public_key_openssh
+}
+
+resource "local_file" "pem_file" {
+  filename = pathexpand("~/.ssh/${aws_key_pair.mood_key_pair.key_name}.pem")
+  file_permission = "400"
+  sensitive_content = tls_private_key.mood_tls_private_key.private_key_pem
+}
 
 resource "aws_instance" "mood_app" {
   ami                         = "ami-00c90dbdc12232b58"
@@ -15,34 +20,7 @@ resource "aws_instance" "mood_app" {
   associate_public_ip_address = true
   subnet_id                   = var.public_subnet_id
   security_groups             = [aws_security_group.mood_app_sg.id]
-  key_name = var.key_name
-
-  provisioner "file" {
-    source      = "./../../../app"
-    destination = "/"
-  }
-
-  provisioner "remote-exec" {
-    inline = [
-      "chmod +x /app/provision.sh",
-      "sudo /app/provision.sh",
-    ]
-  }
-  
-  # Login to the ec2-user with the aws key.
-  connection {
-    type        = "ssh"
-    user        = "ec2-user"
-    password    = ""
-    private_key = file(var.key_path)
-    host        = self.public_ip
-  }
-  
-  depends_on = [
-    aws_security_group.mood_app_sg,
-    tls_private_key.mood_tls_private_key,
-    aws_key_pair.mood_key_pair
-  ]  
+  key_name = aws_key_pair.mood_key_pair.key_name
   
   tags = {
     Name = "mood-app-instance"

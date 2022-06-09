@@ -20,16 +20,8 @@ export AWS_DEFAULT_REGION=<your-desired-region>
 ```
 Alternatively, if you already have an `aws/config` file set up with credentials, you can set an AWS profile in the provider definition. (This is also helpful if you have many different acconuts configured locally, as sometimes terraform defaults to the `default` profile). 
 
-You also need to choose which SSH keys you would like to access your instances. 
-```bash
-export TF_VAR_ssh_key_name=<>
-export TF_VAR_ssh_key_path=<>
-```
-If you do not wish to export any of the above, you will be prompted to write them every time you run terraform. 
-
 ### 1. Building the wider infrastructure
-The plan is to have wider infrastructure which looks like this, first I will build the VPC, two subnets and configure firewalls. 
-![](./images/network_diagram.png)
+VPC, Subnets, NACLs, IGW, and route tables built. 
 
 ### 2. Building the DB 
 To avoid having credentials in plaintext, create your DB credentials by running the following commands before TF apply:
@@ -53,3 +45,5 @@ output db_password {
     value = sensitive(aws_db_instance.mood_db.password)
 }
 ```
+- Later I had to resort to outputting those, so that running `terraform output -json` would enable me to feed the credentials into the app instance. Ideally this would have been done using terraform provisioner, but it wasn't working. 
+- SG constantly forces recreation of instance too. 

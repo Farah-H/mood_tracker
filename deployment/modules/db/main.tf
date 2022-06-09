@@ -12,6 +12,7 @@ resource "aws_db_instance" "mood_db" {
   apply_immediately    = true
   port                 = 3306
   publicly_accessible  = false
+  skip_final_snapshot = true
 
   tags = {
     Name = "mood_rds"

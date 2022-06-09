@@ -3,9 +3,11 @@ output "db_host" {
 }
 
 output "db_username" {
-  value = sensitive(aws_db_instance.mood_db.username)
+  value = aws_db_instance.mood_db.username
+  sensitive = true
 }
 
 output "db_password" {
-  value = sensitive(aws_db_instance.mood_db.password)
+  value = aws_db_instance.mood_db.password
+  sensitive = true
 }

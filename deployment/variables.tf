@@ -9,7 +9,3 @@ variable "db_password" {
 variable "ssh_key_name" {
   description = "SSH .pem key name"
 }
-
-variable "ssh_key_path" {
-  description = "SSH key path"
-}

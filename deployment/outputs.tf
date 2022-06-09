@@ -17,3 +17,15 @@ output "private_subnet_id" {
 output "db_hostname" {
   value = module.db.db_host
 }
+
+output "db_credentials" {
+  value = {
+    db_username = module.db.db_username,
+    db_password = module.db.db_password
+  }
+  sensitive = true
+}
+
+output "app_dns" {
+  value = module.app.app_instance
+}

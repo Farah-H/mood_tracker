@@ -16,7 +16,6 @@ module "subnets" {
 
   vpc_id = module.vpc.vpc_id
   igw_id = module.vpc.igw_id
-  my_ip  = "${module.myip.address}/32"
 }
 
 module "db" {
@@ -30,7 +29,6 @@ module "db" {
 module "app" {
   source = "./modules/app"
 
-  my_ip            = "${module.myip.address}/32"
   public_subnet_id = module.subnets.public_subnet_id
   vpc_id           = module.vpc.vpc_id
 }
