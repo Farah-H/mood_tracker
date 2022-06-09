@@ -1,4 +1,5 @@
-*.terraform*
+.terraform*
 .DS*
 venv*
-terraform.*
+terraform.tfstate*
+*.pem

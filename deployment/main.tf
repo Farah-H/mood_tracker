@@ -1,6 +1,5 @@
 provider "aws" {
-  access_key = var.aws_access_key_id
-  secret_key = var.aws_secret_access_key
+  profile = "dan"
 }
 
 module "myip" {
@@ -25,5 +24,13 @@ module "db" {
 
   db_username = var.db_username
   db_password = var.db_password
-  vpc_id = module.vpc.vpc_id
+  vpc_id      = module.vpc.vpc_id
+}
+
+module "app" {
+  source = "./modules/app"
+
+  my_ip            = "${module.myip.address}/32"
+  public_subnet_id = module.subnets.public_subnet_id
+  vpc_id           = module.vpc.vpc_id
 }

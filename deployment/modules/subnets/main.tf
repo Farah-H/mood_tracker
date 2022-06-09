@@ -53,20 +53,20 @@ resource "aws_network_acl" "public_nacl" {
     }
 
     ingress {
-        rule_no = 300
-        action = "allow"
-        from_port = 1024
-        to_port = 65535
-        cidr_block = "0.0.0.0/0"
-        protocol = "tcp"
-    }
-
-    ingress {
         rule_no = 400
         action = "allow"
         from_port = 22
         to_port = 22
-        cidr_block = var.my_ip
+        cidr_block = "0.0.0.0/0"
+        protocol = "tcp"
+    }
+    
+    ingress {
+        rule_no = 500
+        action = "allow"
+        from_port = 1024
+        to_port = 65535
+        cidr_block = "0.0.0.0/0"
         protocol = "tcp"
     }
 
@@ -102,7 +102,7 @@ resource "aws_network_acl" "public_nacl" {
         action = "allow"
         from_port = 22
         to_port = 22
-        cidr_block = var.my_ip
+        cidr_block = "0.0.0.0/0"
         protocol = "tcp"
     }
 } 
@@ -152,7 +152,7 @@ resource "aws_network_acl" "private_nacl" {
         action = "allow"
         from_port = 22
         to_port = 22
-        cidr_block = var.my_ip
+        cidr_block = "0.0.0.0/0"
         protocol = "tcp"
     }
 
@@ -172,7 +172,7 @@ resource "aws_network_acl" "private_nacl" {
         action = "allow"
         from_port = 22
         to_port = 22
-        cidr_block = var.my_ip
+        cidr_block = "0.0.0.0/0"
         protocol = "tcp"
     }
 

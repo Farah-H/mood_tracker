@@ -1,11 +1,15 @@
-variable db_username {
-    description = "export TF_VAR_db_username=<your-master-username>"
+variable "db_username" {
+  description = "export TF_VAR_db_username=<your-desired-master-username>"
 }
 
-variable db_password {
-    description = "export TF_VAR_db_password=<your-password>"
+variable "db_password" {
+  description = "export TF_VAR_db_password=<your-desired-db-password>"
 }
 
-variable "aws_access_key_id" {}
+variable "ssh_key_name" {
+  description = "SSH .pem key name"
+}
 
-variable "aws_secret_access_key" {}
+variable "ssh_key_path" {
+  description = "SSH key path"
+}

@@ -1,10 +1,5 @@
-variable "namespace" {}
-variable "resource_tag_name" {}
-variable "ami" {}
-variable "instance_type" {}
-variable "user_data" {}
-variable "subnet_id" {}
-variable "associate_public_ip_address" {}
-variable "iam_instance_profile" {}
+variable "public_subnet_id" {}
+variable "my_ip" {}
+variable "vpc_id" {}
 variable "key_name" {}
-variable "rds_port" {}
+variable "key_path" {}
