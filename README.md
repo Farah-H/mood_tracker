@@ -46,4 +46,9 @@ output db_password {
 }
 ```
 - Later I had to resort to outputting those, so that running `terraform output -json` would enable me to feed the credentials into the app instance. Ideally this would have been done using terraform provisioner, but it wasn't working. 
+
+DB was built successfully. 
+
+### APP Instances
+
 - SG constantly forces recreation of instance too. 

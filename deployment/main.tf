@@ -1,6 +1,4 @@
-provider "aws" {
-  profile = "dan"
-}
+provider "aws" {}
 
 module "myip" {
   source  = "4ops/myip/http"
