@@ -19,19 +19,12 @@ export AWS_SECRET_ACCESS_KEY=<your-secret-key>
 export AWS_DEFAULT_REGION=<your-desired-region>
 ```
 Alternatively, if you already have an `aws/config` file set up with credentials, you can set an AWS profile in the provider definition. (This is also helpful if you have many different acconuts configured locally, as sometimes terraform defaults to the `default` profile). 
-
+- Note: This is what I did, hence the `profile = "rds_project"` line in main.tf
 ### 1. Building the wider infrastructure
 VPC, Subnets, NACLs, IGW, and route tables built. 
 
 ### 2. Building the DB 
-To avoid having credentials in plaintext, create your DB credentials by running the following commands before TF apply:
-**Note:** this is not the safest (or even a safe) way to store credentials, Ideally we'd set up a secrets vault or certificate, but it's better than having them in plaintext
-
-```bash
-export TF_VAR_db_username=<your-master-username>
-export TF_VAR_db_password=<your-password>
-```
-These will be exported by the module as outputs, but not shown in plaintext, so they can be transferred to the app instances to access the DB:
+The credentials will be exported by the module as outputs, but not shown in plaintext, so they can be transferred to the app instances to access the DB:
 ```terraform
 output db_host {
     value = aws_db_instance.mood_db.address
@@ -50,5 +43,4 @@ output db_password {
 DB was built successfully. 
 
 ### APP Instances
-
-- SG constantly forces recreation of instance too. 
+- Provisioner was not working, eventually had to resort to trying to provision manually using scp. 
