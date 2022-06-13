@@ -7,16 +7,21 @@ resource "aws_db_instance" "mood_db" {
   instance_class       = "db.t3.micro"
   db_name              = "users"
   username             = var.db_username
-  password             = var.db_password
+  password             = random_password.mood_db_password.result
   parameter_group_name = "default.mysql8.0"
   apply_immediately    = true
   port                 = 3306
   publicly_accessible  = false
-  skip_final_snapshot = true
+  skip_final_snapshot  = true
 
   tags = {
     Name = "mood_rds"
   }
+}
+
+resource "random_password" "mood_db_password" {
+  length  = 16
+  special = true
 }
 
 resource "aws_security_group" "mood_db_sg" {

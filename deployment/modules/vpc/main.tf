@@ -1,19 +1,19 @@
 # vpc
 resource "aws_vpc" "mood_vpc" {
-    cidr_block = "10.0.0.0/16"
-    enable_dns_support   = true
-    enable_dns_hostnames = true
+  cidr_block           = "10.0.0.0/16"
+  enable_dns_support   = true
+  enable_dns_hostnames = true
 
-    tags = {
-        Name = "mood_vpc"
-    }
-  
+  tags = {
+    Name = "mood_vpc"
+  }
+
 }
 
 resource "aws_internet_gateway" "igw" {
-    vpc_id = aws_vpc.mood_vpc.id
+  vpc_id = aws_vpc.mood_vpc.id
 
-    tags = {
-        Name = "mood_igw"
-    }
+  tags = {
+    Name = "mood_igw"
+  }
 }

@@ -9,8 +9,8 @@ resource "aws_key_pair" "mood_key_pair" {
 }
 
 resource "local_file" "pem_file" {
-  filename = pathexpand("~/.ssh/${aws_key_pair.mood_key_pair.key_name}.pem")
-  file_permission = "400"
+  filename          = pathexpand("~/.ssh/${aws_key_pair.mood_key_pair.key_name}.pem")
+  file_permission   = "400"
   sensitive_content = tls_private_key.mood_tls_private_key.private_key_pem
 }
 
@@ -20,8 +20,8 @@ resource "aws_instance" "mood_app" {
   associate_public_ip_address = true
   subnet_id                   = var.public_subnet_id
   security_groups             = [aws_security_group.mood_app_sg.id]
-  key_name = aws_key_pair.mood_key_pair.key_name
-  
+  key_name                    = aws_key_pair.mood_key_pair.key_name
+
   tags = {
     Name = "mood-app-instance"
   }

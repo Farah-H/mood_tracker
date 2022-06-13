@@ -1,8 +1,6 @@
-provider "aws" {}
-
-module "myip" {
-  source  = "4ops/myip/http"
-  version = "1.0.0"
+provider "aws" {
+  profile = "rds_project"
+  region  = "eu-west-1"
 }
 
 module "vpc" {
@@ -20,7 +18,6 @@ module "db" {
   source = "./modules/db"
 
   db_username = var.db_username
-  db_password = var.db_password
   vpc_id      = module.vpc.vpc_id
 }
 
@@ -29,4 +26,11 @@ module "app" {
 
   public_subnet_id = module.subnets.public_subnet_id
   vpc_id           = module.vpc.vpc_id
+}
+
+module "scaling" {
+  source = "./modules/scaling"
+
+  app_instance_id  = module.app.app_instance_id
+  public_subnet_id = module.subnets.public_subnet_id
 }

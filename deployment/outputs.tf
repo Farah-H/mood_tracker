@@ -27,5 +27,17 @@ output "db_credentials" {
 }
 
 output "app_dns" {
-  value = module.app.app_instance
+  value = module.app.app_instance_dns
+}
+
+output "app_id" {
+  value = module.app.app_instance_id
+}
+
+output "elb_id" {
+  value = module.scaling.elb_id
+}
+
+output "elb_dns" {
+  value = module.scaling.elb_dns
 }
